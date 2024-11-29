@@ -9,17 +9,17 @@ public class Excursion {
     @PrimaryKey(autoGenerate = true)
     private int excursionID;
     private String excursionName;
-    private double price;
+    private String date;
     private int vacationID;
 
     //constructors
-    public Excursion(int excursionID, String excursionName, double price, int vacationID) {
+
+    public Excursion(int excursionID, String excursionName, String date, int vacationID) {
         this.excursionID = excursionID;
         this.excursionName = excursionName;
-        this.price = price;
+        this.date = date;
         this.vacationID = vacationID;
     }
-
 
     //getters and setters
 
@@ -39,12 +39,12 @@ public class Excursion {
         this.excursionName = excursionName;
     }
 
-    public double getPrice() {
-        return price;
+    public String getDate() {
+        return date;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public int getVacationID() {

@@ -14,9 +14,14 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.vacationplanner.R;
+import com.example.vacationplanner.database.Repository;
+import com.example.vacationplanner.entities.Excursion;
+import com.example.vacationplanner.entities.Vacation;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class VacationList extends AppCompatActivity {
+private Repository repository;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +59,18 @@ public class VacationList extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         if(item.getItemId()==R.id.sample){
+            //adding sample data
+            repository=new Repository(getApplication());
             //notification in app
-            Toast.makeText(VacationList.this, "put in sample data", Toast.LENGTH_LONG).show();
+//            Toast.makeText(VacationList.this, "put in sample data", Toast.LENGTH_LONG).show();
+            Vacation vacation=new Vacation(0,"Hawaii", "HolidayInn", "11/12/12","11/12/12");
+            repository.insert(vacation);
+            vacation=new Vacation(0,"New York", "HolidayInn", "11/12/12","11/12/12");
+            Excursion excursion=new Excursion(0,"kayak", "11/12/12", 1);
+            repository.insert(excursion);
+            excursion=new Excursion(0,"snorkel", "11/12/12", 1);
+            repository.insert(excursion);
+
             return true;
         }
         //if we had a back arrow, we can use android built in ones.
