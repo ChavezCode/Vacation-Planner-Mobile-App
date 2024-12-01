@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/sample"
-        android:title="Destination One" />
+        android:title="Save Vacation" />
     <item
 
         android:id="@+id/sampleTwo"

@@ -12,12 +12,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vacationplanner.R;
 import com.example.vacationplanner.database.Repository;
 import com.example.vacationplanner.entities.Excursion;
 import com.example.vacationplanner.entities.Vacation;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.List;
 
 public class VacationList extends AppCompatActivity {
 private Repository repository;
@@ -42,9 +46,19 @@ private Repository repository;
                 startActivity(intent);
             }
         });
+        RecyclerView recyclerView=findViewById(R.id.recyclerview);
+        //query the db so define the repository
+        repository=new Repository(getApplication());
+        //get list of all the vacations
+        List<Vacation> allVacations=repository.getmAllVacations();
+        final VacationAdapter vacationAdapter=new VacationAdapter(this);
+        recyclerView.setAdapter(vacationAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        //put list of vacations onto recyclerview
+        vacationAdapter.setVacations(allVacations);
 
         //to display the intent message in the main Activity class
-        System.out.println(getIntent().getStringExtra("test"));
+        //System.out.println(getIntent().getStringExtra("test"));
 
     }
     //menu created in res file, adding it to the activity
@@ -53,6 +67,20 @@ private Repository repository;
         getMenuInflater().inflate(R.menu.menu_vacation_list, menu);
         return true;
 
+    }
+
+    //want the screen to update after items have been added to the vacation list
+    @Override
+    public void onResume(){
+
+        super.onResume();
+        //on resume gets products from the db and puts ads them to the recyclerview again (kinda like a refresh)
+        List<Vacation> allVacations=repository.getmAllVacations();
+        RecyclerView recyclerView=findViewById(R.id.recyclerview);
+        final VacationAdapter vacationAdapter=new VacationAdapter(this);
+        recyclerView.setAdapter(vacationAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        vacationAdapter.setVacations(allVacations);
     }
 
     //to work with things on the menu
