@@ -83,7 +83,7 @@ public class VacationDetails extends AppCompatActivity {
         recyclerView.setAdapter(excursionAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         //to filter by ID
-        List<Excursion> filteredExcursions= new ArrayList<>();
+        List<Excursion> filteredExcursions = new ArrayList<>();
         for (Excursion ex : repository.getmAllExcursion()) {
             if (ex.getVacationID() == vacationID) {
                 filteredExcursions.add(ex);
@@ -116,18 +116,19 @@ public class VacationDetails extends AppCompatActivity {
                 } else {
                     //make it the last  ID in the database plus 1
                     vacationID = repository.getmAllVacations().get(repository.getmAllVacations().size() - 1).getVacationID() + 1;
-                }
-                //make a new vacation
-                vacation = new Vacation(vacationID, editName.getText().toString(), editHotel.getText().toString(), editStartDate.getText().toString(), editEndDate.getText().toString());
-                repository.insert(vacation);
-                //close the screen
-                this.finish();
 
+                    //make a new vacation
+                    vacation = new Vacation(vacationID, editName.getText().toString(), editHotel.getText().toString(), editStartDate.getText().toString(), editEndDate.getText().toString());
+                    repository.insert(vacation);
+                    //close the screen
+                    this.finish();
+
+                }
             }
             //if we're modifying the vacation
             else {
                 vacation = new Vacation(vacationID, editName.getText().toString(), editHotel.getText().toString(), editStartDate.getText().toString(), editEndDate.getText().toString());
-                repository.insert(vacation);
+                repository.update(vacation);
                 this.finish();
             }
 
