@@ -17,7 +17,7 @@ import com.example.vacationplanner.entities.Vacation;
 import java.util.List;
 
 public class ExcursionAdapter extends RecyclerView.Adapter<ExcursionAdapter.ExcursionViewHolder> {
-    private List<Excursion> mExcurions;
+    private List<Excursion> mExcursions;
     private final Context context;
     private final LayoutInflater mInflater;
 
@@ -35,8 +35,8 @@ public class ExcursionAdapter extends RecyclerView.Adapter<ExcursionAdapter.Excu
                 @Override
                 public void onClick(View v) {
                     int position=getAdapterPosition();
-                    final Excursion current=mExcurions.get(position);
-                    Intent intent=new Intent(context, ExcursionDetails.class);
+                    final Excursion current=mExcursions.get(position);
+                    Intent intent=new Intent(context, ExcursionList.class);
                     intent.putExtra("id", current.getExcursionID());
                     intent.putExtra("name", current.getExcursionName());
                     intent.putExtra("date", current.getDate());
@@ -62,8 +62,8 @@ public class ExcursionAdapter extends RecyclerView.Adapter<ExcursionAdapter.Excu
 
     @Override
     public void onBindViewHolder(@NonNull ExcursionAdapter.ExcursionViewHolder holder, int position) {
-        if(mExcurions!=null){
-            Excursion current=mExcurions.get(position);
+        if(mExcursions!=null){
+            Excursion current=mExcursions.get(position);
             String name=current.getExcursionName();
             int vacaID= current.getVacationID();
             holder.excursionItemView.setText(name);
@@ -77,14 +77,14 @@ public class ExcursionAdapter extends RecyclerView.Adapter<ExcursionAdapter.Excu
 
     @Override
     public int getItemCount() {
-        if(mExcurions!=null){
-            return mExcurions.size();
+        if(mExcursions!=null){
+            return mExcursions.size();
         }
         else return 0;
     }
 
-    public void setExcurions(List<Excursion> excurions){
-        mExcurions=excurions;
+    public void setExcurions(List<Excursion> excursions){
+        mExcursions=excursions;
         notifyDataSetChanged();
     }
 

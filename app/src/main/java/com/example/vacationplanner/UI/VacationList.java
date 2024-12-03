@@ -74,7 +74,7 @@ private Repository repository;
     public void onResume(){
 
         super.onResume();
-        //on resume gets products from the db and puts ads them to the recyclerview again (kinda like a refresh)
+        //on resume gets products from the db and ads them to the recyclerview again (kinda like a refresh)
         List<Vacation> allVacations=repository.getmAllVacations();
         RecyclerView recyclerView=findViewById(R.id.recyclerview);
         final VacationAdapter vacationAdapter=new VacationAdapter(this);
