@@ -139,7 +139,7 @@ public class VacationDetails extends AppCompatActivity {
         //if the menu option is delete
         else if (item.getItemId() == R.id.deletevacation) {
             Vacation vacation;
-            Excursion excursion;
+
 
             //check to see if an excursion item exists
             if (repository.getAssociatedExcursion(vacationID).size()!=0) {
