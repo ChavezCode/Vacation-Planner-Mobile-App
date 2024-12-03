@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vacationplanner.R;
 import com.example.vacationplanner.entities.Excursion;
-import com.example.vacationplanner.entities.Vacation;
 
 import java.util.List;
 
@@ -36,7 +35,7 @@ public class ExcursionAdapter extends RecyclerView.Adapter<ExcursionAdapter.Excu
                 public void onClick(View v) {
                     int position=getAdapterPosition();
                     final Excursion current=mExcursions.get(position);
-                    Intent intent=new Intent(context, ExcursionList.class);
+                    Intent intent=new Intent(context, ExcursionDetails.class);
                     intent.putExtra("id", current.getExcursionID());
                     intent.putExtra("name", current.getExcursionName());
                     intent.putExtra("date", current.getDate());

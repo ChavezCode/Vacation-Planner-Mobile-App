@@ -1,6 +1,5 @@
 package com.example.vacationplanner.UI;
 
-import android.content.EntityIterator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -76,7 +75,7 @@ public class VacationDetails extends AppCompatActivity {
         fabExcursion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(VacationDetails.this, ExcursionList.class);
+                Intent intent = new Intent(VacationDetails.this, ExcursionDetails.class);
                 startActivity(intent);
             }
         });
