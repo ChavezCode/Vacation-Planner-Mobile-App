@@ -3,10 +3,10 @@
 
 
     <item
-        android:id="@+id/savenew"
+        android:id="@+id/savevacation"
         android:title="Save" />
 
     <item
-        android:id="@+id/delete"
+        android:id="@+id/deletevacation"
         android:title="Delete" />
 </menu>

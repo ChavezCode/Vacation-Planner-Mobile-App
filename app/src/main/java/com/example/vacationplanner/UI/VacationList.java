@@ -94,9 +94,9 @@ private Repository repository;
             Vacation vacation=new Vacation(0,"Hawaii", "HolidayInn", "11/12/12","11/12/12");
             repository.insert(vacation);
             vacation=new Vacation(0,"New York", "HolidayInn", "11/12/12","11/12/12");
-            Excursion excursion=new Excursion(0,"kayak", "11/12/12", 1);
+            Excursion excursion=new Excursion(0,"kayak", "11/12/12", 12);
             repository.insert(excursion);
-            excursion=new Excursion(0,"snorkel", "11/12/12", 1);
+            excursion=new Excursion(0,"snorkel", "11/12/12", 12);
             repository.insert(excursion);
 
             return true;

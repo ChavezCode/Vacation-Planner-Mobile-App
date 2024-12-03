@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +27,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VacationDetails extends AppCompatActivity {
+
+    //we need excursionID to check if the excursion exists.
+    List<Excursion> getAssociatedExcursion;
     //we need the edit text info in the vacation detail layout
     int vacationID;
     String vacationName;
@@ -104,7 +108,7 @@ public class VacationDetails extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.savenew) {
+        if (item.getItemId() == R.id.savevacation) {
             Vacation vacation;
             //if id = -1 we want to make it a new item
             if (vacationID == -1) {
@@ -131,6 +135,26 @@ public class VacationDetails extends AppCompatActivity {
                 repository.update(vacation);
                 this.finish();
             }
+
+        }
+        //if the menu option is delete
+        else if (item.getItemId() == R.id.deletevacation) {
+            Vacation vacation;
+            Excursion excursion;
+
+            //check to see if an excursion item exists
+            if (repository.getAssociatedExcursion(vacationID).size()!=0) {
+                Toast.makeText(VacationDetails.this, "You cannot delete vacations with associated excursions!", Toast.LENGTH_LONG).show();
+                System.out.println(getIntent().getStringExtra("excursions exist"));
+
+            }
+            else{
+                //delete if no associated excursions
+                vacation = new Vacation(vacationID, editName.getText().toString(), editHotel.getText().toString(), editStartDate.getText().toString(), editEndDate.getText().toString());
+                repository.delete(vacation);
+                this.finish();
+            }
+
 
         }
         return true;
