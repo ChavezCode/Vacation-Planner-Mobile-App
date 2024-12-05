@@ -67,11 +67,18 @@
                     android:padding="10dp"
                     android:text="Start: "></TextView>
 
-                <EditText
+<!--                <EditText-->
+<!--                    android:id="@+id/startdate"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="50dp"-->
+<!--                    android:hint="Arriving"></EditText>-->
+
+                <Button
                     android:id="@+id/startdate"
                     android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:hint="Arriving"></EditText>
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Button" />
             </LinearLayout>
 
             <LinearLayout
@@ -85,11 +92,18 @@
                     android:padding="10dp"
                     android:text="End: "></TextView>
 
-                <EditText
+<!--                <EditText-->
+<!--                    android:id="@+id/enddate"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="50dp"-->
+<!--                    android:hint="Departing"></EditText>-->
+
+                <Button
                     android:id="@+id/enddate"
                     android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:hint="Departing"></EditText>
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Button" />
             </LinearLayout>
 
         </LinearLayout>

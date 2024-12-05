@@ -1,10 +1,13 @@
 package com.example.vacationplanner.UI;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -22,8 +25,13 @@ import com.example.vacationplanner.entities.Excursion;
 import com.example.vacationplanner.entities.Vacation;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class VacationDetails extends AppCompatActivity {
 
@@ -40,6 +48,12 @@ public class VacationDetails extends AppCompatActivity {
     EditText editStartDate;
     EditText editEndDate;
     Repository repository;
+    Button startButton;
+    Button endButton;
+    DatePickerDialog.OnDateSetListener myStartDate;
+    DatePickerDialog.OnDateSetListener myEndDate;
+    final Calendar myStartCalendar=Calendar.getInstance();
+    final Calendar myEndCalendar=Calendar.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,16 +64,79 @@ public class VacationDetails extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+
         });
+
 
         FloatingActionButton fabExcursion = findViewById(R.id.fabVExcursionList);
 
+        //start calendar button
+        startButton=findViewById(R.id.startdate);
+        endButton=findViewById(R.id.enddate);
+        String myFormat = "MM/dd/yy";
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+        String currentDate=sdf.format(new Date());
+        //ednbutton onclicklistener
+        endButton.setText(currentDate);
+        endButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Date date;
+                String info=endButton.getText().toString();
+                try {
+                    myEndCalendar.setTime(sdf.parse(info));
+                }catch (ParseException e) {
+                    e.printStackTrace();;
+                }
+                new DatePickerDialog(VacationDetails.this,myEndDate, myEndCalendar.get(Calendar.YEAR),
+                        myEndCalendar.get(Calendar.MONTH), myEndCalendar.get(Calendar.DAY_OF_MONTH)).show();
+
+            }
+        });
+        //start button on click listener
+        startButton.setText(currentDate);
+        startButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Date date;
+                String info=startButton.getText().toString();
+                try {
+                    myStartCalendar.setTime(sdf.parse(info));
+                }catch (ParseException e) {
+                    e.printStackTrace();;
+                }
+                new DatePickerDialog(VacationDetails.this,myStartDate, myStartCalendar.get(Calendar.YEAR),
+                        myStartCalendar.get(Calendar.MONTH), myStartCalendar.get(Calendar.DAY_OF_MONTH)).show();
+
+            }
+        });
+        //startdate
+        myStartDate=new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                myStartCalendar.set(Calendar.YEAR, year);
+                myStartCalendar.set(Calendar.MONTH, month);
+                myStartCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel();
+            }
+        };
+
+        myEndDate=new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                myEndCalendar.set(Calendar.YEAR, year);
+                myEndCalendar.set(Calendar.MONTH, month);
+                myEndCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel();
+            }
+        };
 
         editName = findViewById(R.id.place);
         editHotel = findViewById(R.id.hotel);
         vacationID = getIntent().getIntExtra("id", -1);
-        editStartDate = findViewById(R.id.startdate);
-        editEndDate = findViewById(R.id.enddate);
+        //need to change the editStartDate and editEndDate not needed for calendar button
+//        editStartDate = findViewById(R.id.startdate);
+//        editEndDate = findViewById(R.id.enddate);
 
         //now get info from recycler and have it populate on the vacation details page when clicked
         vacationName = getIntent().getStringExtra("name");
@@ -69,9 +146,13 @@ public class VacationDetails extends AppCompatActivity {
 
         editName.setText(vacationName);
         editHotel.setText(hotel);
-        editStartDate.setText(startDate);
-        editEndDate.setText(endDate);
 
+        startButton.setText(startDate);
+        //work on end date calendar button
+        endButton.setText(endDate);
+
+
+//opens excursion details page
         fabExcursion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,6 +160,8 @@ public class VacationDetails extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        //turns on recylcer view in vacation list and details
         RecyclerView recyclerView = findViewById(R.id.vacationrecyclerview);
         repository = new Repository(getApplication());
         List<Excursion> allExcursions = repository.getmAllExcursion();
@@ -96,6 +179,17 @@ public class VacationDetails extends AppCompatActivity {
         excursionAdapter.setExcurions(filteredExcursions);
         //gets all excursions
         //excursionAdapter.setExcurions(allExcursions);
+
+
+    }
+    //update date picked for calendar button
+    private void updateLabel() {
+        String myFormat = "MM/dd/yy";
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+//        editStartDate.setText(sdf.format(myCalendar.getTime()));
+        startButton.setText(sdf.format(myStartCalendar.getTime()));
+        endButton.setText(sdf.format(myEndCalendar.getTime()));
 
 
     }
@@ -121,7 +215,7 @@ public class VacationDetails extends AppCompatActivity {
                     vacationID = repository.getmAllVacations().get(repository.getmAllVacations().size() - 1).getVacationID() + 1;
 
                     //make a new vacation
-                    vacation = new Vacation(vacationID, editName.getText().toString(), editHotel.getText().toString(), editStartDate.getText().toString(), editEndDate.getText().toString());
+                    vacation = new Vacation(vacationID, editName.getText().toString(), editHotel.getText().toString(), startButton.getText().toString(), endButton.getText().toString());
                     repository.insert(vacation);
                     //close the screen
                     this.finish();
@@ -130,7 +224,11 @@ public class VacationDetails extends AppCompatActivity {
             }
             //if we're modifying the vacation
             else {
-                vacation = new Vacation(vacationID, editName.getText().toString(), editHotel.getText().toString(), editStartDate.getText().toString(), editEndDate.getText().toString());
+                //original
+//                vacation = new Vacation(vacationID, editName.getText().toString(), editHotel.getText().toString(), editStartDate.getText().toString(), editEndDate.getText().toString());
+//                repository.update(vacation);
+                //working on having the calendar button get updated itself
+                vacation = new Vacation(vacationID, editName.getText().toString(), editHotel.getText().toString(), startButton.getText().toString(), endButton.getText().toString());
                 repository.update(vacation);
                 this.finish();
             }
@@ -149,7 +247,7 @@ public class VacationDetails extends AppCompatActivity {
             }
             else{
                 //delete if no associated excursions
-                vacation = new Vacation(vacationID, editName.getText().toString(), editHotel.getText().toString(), editStartDate.getText().toString(), editEndDate.getText().toString());
+                vacation = new Vacation(vacationID, editName.getText().toString(), editHotel.getText().toString(), startButton.getText().toString(), endButton.getText().toString());
                 repository.delete(vacation);
                 this.finish();
             }
