@@ -208,7 +208,12 @@ public class VacationDetails extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        validDate = myEndCalendar.after(myStartCalendar);
         if (item.getItemId() == R.id.savevacation) {
+            if(!validDate){
+                Toast.makeText(VacationDetails.this, "Make sure your start day is before your end date or that your end date is after your start date!", Toast.LENGTH_LONG).show();
+                return false;
+            }
             Vacation vacation;
             //if id = -1 we want to make it a new item
             if (vacationID == -1) {
@@ -223,24 +228,15 @@ public class VacationDetails extends AppCompatActivity {
                 } else {
                     //make it the last  ID in the database plus 1
                     vacationID = repository.getmAllVacations().get(repository.getmAllVacations().size() - 1).getVacationID() + 1;
-
-                    //DATE VALIDATION
-                    validDate = myEndCalendar.after(myStartCalendar);
-                    try {
-                        if (validDate) {
-
-
-                            //make a new vacation
-                            vacation = new Vacation(vacationID, editName.getText().toString(), editHotel.getText().toString(), startButton.getText().toString(), endButton.getText().toString());
-                            repository.insert(vacation);
-                            //close the screen
-                            this.finish();
-                        }
-                    } catch (Exception e) {
-                        Toast.makeText(VacationDetails.this, "Make sure your start day is before your end date or that your end date is after your start date!", Toast.LENGTH_LONG).show();
-                    }
-
+                    //make new vacation
+                    vacation = new Vacation(vacationID, editName.getText().toString(), editHotel.getText().toString(), startButton.getText().toString(), endButton.getText().toString());
+                    repository.insert(vacation);
+                    this.finish();
                 }
+
+
+
+
             }
 
             //if vacationID exists update the item
@@ -250,7 +246,6 @@ public class VacationDetails extends AppCompatActivity {
 //                repository.update(vacation);
                 //new version with calendar button
                 //DATE VALIDATION
-                validDate = myEndCalendar.after(myStartCalendar);
                 if (validDate) {
                     vacation = new Vacation(vacationID, editName.getText().toString(), editHotel.getText().toString(), startButton.getText().toString(), endButton.getText().toString());
                     repository.update(vacation);
