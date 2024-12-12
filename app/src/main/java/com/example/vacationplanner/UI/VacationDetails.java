@@ -285,6 +285,8 @@ public class VacationDetails extends AppCompatActivity {
         }
         //notification for vacation
         if (item.getItemId() == R.id.notify){
+            Vacation vacation;
+            vacation = new Vacation(vacationID, editName.getText().toString(), editHotel.getText().toString(), startButton.getText().toString(), endButton.getText().toString());
             //pull date from the string
             String dateFromScreen = startButton.getText().toString();
             String myFormat = "MM/dd/yy";
@@ -299,7 +301,7 @@ public class VacationDetails extends AppCompatActivity {
             //intent that goes to broadcast reciever
             Intent intent = new Intent(VacationDetails.this, MyReceiver.class);
             //will need to create a vacation end later
-            intent.putExtra("key", "Vacation is starting!");
+            intent.putExtra("key", "Your vacation to " + vacation.getVacationName() + " is starting!");
             //numVacStartAlert has to be different for each alert sent
             PendingIntent sender=PendingIntent.getBroadcast(VacationDetails.this, ++MainActivity.numVacStartAlert, intent, PendingIntent.FLAG_IMMUTABLE); //if FLAG_IMMUTABLE does not work, try FLAG_ONE_SHOT
             //get alarm to show on app
