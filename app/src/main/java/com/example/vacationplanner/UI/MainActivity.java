@@ -14,6 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.vacationplanner.R;
 
 public class MainActivity extends AppCompatActivity {
+    public static int numVacStartAlert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

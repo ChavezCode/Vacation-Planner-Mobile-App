@@ -38,7 +38,7 @@ public class ExcursionDetails extends AppCompatActivity {
     }
 
 
-    //work on this method
+    //work on formula
 //    @Override
 //    public boolean onOptionsItemSelected(MenuItem item){
 //        if (item.getItemId() == R.id.excursionSave){

@@ -1,6 +1,9 @@
 package com.example.vacationplanner.UI;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -210,6 +213,7 @@ public class VacationDetails extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         validDate = myEndCalendar.after(myStartCalendar);
         if (item.getItemId() == R.id.savevacation) {
+            //date validation
             if(!validDate){
                 Toast.makeText(VacationDetails.this, "Make sure your start day is before your end date or that your end date is after your start date!", Toast.LENGTH_LONG).show();
                 return false;
@@ -270,12 +274,39 @@ public class VacationDetails extends AppCompatActivity {
 
             } else {
                 //delete if no associated excursions
+
                 vacation = new Vacation(vacationID, editName.getText().toString(), editHotel.getText().toString(), startButton.getText().toString(), endButton.getText().toString());
                 repository.delete(vacation);
+                Toast.makeText(VacationDetails.this, vacation.getVacationName() + " was deleted", Toast.LENGTH_LONG).show();
                 this.finish();
             }
 
 
+        }
+        //notification for vacation
+        if (item.getItemId() == R.id.notify){
+            //pull date from the string
+            String dateFromScreen = startButton.getText().toString();
+            String myFormat = "MM/dd/yy";
+            SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US); //simple date format has good method for making mils (milliseconds since start of time)
+            Date myDate = null;
+            try {
+                myDate = sdf.parse(dateFromScreen);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            Long trigger = myDate.getTime();
+            //intent that goes to broadcast reciever
+            Intent intent = new Intent(VacationDetails.this, MyReceiver.class);
+            //will need to create a vacation end later
+            intent.putExtra("key", "Vacation is starting!");
+            //numVacStartAlert has to be different for each alert sent
+            PendingIntent sender=PendingIntent.getBroadcast(VacationDetails.this, ++MainActivity.numVacStartAlert, intent, PendingIntent.FLAG_IMMUTABLE); //if FLAG_IMMUTABLE does not work, try FLAG_ONE_SHOT
+            //get alarm to show on app
+            AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+            alarmManager.set(AlarmManager.RTC_WAKEUP, trigger, sender);
+
+            return true;
         }
         return true;
     }
