@@ -14,7 +14,9 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.vacationplanner.R;
 
 public class MainActivity extends AppCompatActivity {
+    //notifications for start and end date for vacations
     public static int numVacStartAlert;
+    public static int numVacEndAlert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
