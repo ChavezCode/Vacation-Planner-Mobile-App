@@ -58,7 +58,7 @@ public class VacationDetails extends AppCompatActivity {
     final Calendar myStartCalendar = Calendar.getInstance();
     final Calendar myEndCalendar = Calendar.getInstance();
 
-    //DATE VALIDATIOn
+    //DATE VALIDATION
     Boolean validDate;
 
     @Override
@@ -93,7 +93,7 @@ public class VacationDetails extends AppCompatActivity {
                     myEndCalendar.setTime(sdf.parse(info));
                 } catch (ParseException e) {
                     e.printStackTrace();
-                    ;
+
                 }
                 new DatePickerDialog(VacationDetails.this, myEndDate, myEndCalendar.get(Calendar.YEAR),
                         myEndCalendar.get(Calendar.MONTH), myEndCalendar.get(Calendar.DAY_OF_MONTH)).show();
@@ -169,7 +169,7 @@ public class VacationDetails extends AppCompatActivity {
             }
         });
 
-        //turns on recylcer view in vacation list and details
+        //turns on recycler view in vacation list and details
         RecyclerView recyclerView = findViewById(R.id.vacationrecyclerview);
         repository = new Repository(getApplication());
         List<Excursion> allExcursions = repository.getmAllExcursion();

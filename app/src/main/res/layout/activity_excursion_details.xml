@@ -10,7 +10,7 @@
     <ScrollView
         android:id="@+id/scrollviewExcursion"
         android:layout_width="446dp"
-        android:layout_height="200dp"
+        android:layout_height="100dp"
         android:background="#4CAF50"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -37,30 +37,19 @@
                     android:layout_height="50dp"
                     android:hint="Sky Dive"></EditText>
             </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:padding="10dp"
-                    android:text="Date: "></TextView>
-
-                <EditText
-                    android:id="@+id/excursionDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:hint="When?"></EditText>
-            </LinearLayout>
-
-
         </LinearLayout>
     </ScrollView>
 
+    <Button
+        android:id="@+id/startDateExcursion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_weight="1"
+        android:text="Start Date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollviewExcursion" />
 
     <!--    <androidx.recyclerview.widget.RecyclerView-->
     <!--        android:id="@+id/excursionrecyclerview"-->

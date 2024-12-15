@@ -1,8 +1,11 @@
 package com.example.vacationplanner.UI;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,10 +17,23 @@ import com.example.vacationplanner.R;
 import com.example.vacationplanner.database.Repository;
 import com.example.vacationplanner.entities.Excursion;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+
 public class ExcursionDetails extends AppCompatActivity {
+
     private Repository repository;
     int vacationID;
     int excursionID;
+    String excursionName;
+    Button startButton;
+    DatePickerDialog.OnDateSetListener myStartDate;
+    final Calendar myStartCalendar = Calendar.getInstance();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +46,28 @@ public class ExcursionDetails extends AppCompatActivity {
             return insets;
         });
 
+        startButton = findViewById(R.id.startDateExcursion);
+        String myFormat = "MM/dd/yy";
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+        String currentDate = sdf.format(new Date());
+        //on click listener
+        startButton.setText(currentDate);
+        startButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Date date;
+                String info = startButton.getText().toString();
+                try {
+                    myStartCalendar.setTime(sdf.parse(info));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                new DatePickerDialog(ExcursionDetails.this, myStartDate, myStartCalendar.get(Calendar.YEAR)
+                        , myStartCalendar.get(Calendar.MONTH), myStartCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
+
     }
     //bring in the menu items
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -38,17 +76,6 @@ public class ExcursionDetails extends AppCompatActivity {
     }
 
 
-    //work on formula
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item){
-//        if (item.getItemId() == R.id.excursionSave){
-//            Excursion excursion;
-//
-//            if(excursionID )
-//        }
-//
-//
-//    }
 
 
 }
