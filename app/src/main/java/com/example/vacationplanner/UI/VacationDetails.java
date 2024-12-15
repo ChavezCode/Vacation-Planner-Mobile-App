@@ -283,17 +283,17 @@ public class VacationDetails extends AppCompatActivity {
 
 
         }
-        //notification for vacation (START)
+        //notification for vacation (START and End)
         if (item.getItemId() == R.id.notify){
             Vacation vacation;
             vacation = new Vacation(vacationID, editName.getText().toString(), editHotel.getText().toString(), startButton.getText().toString(), endButton.getText().toString());
             //pull date from the string for START DATE
-            String dateFromScreen = startButton.getText().toString();
+            String startDateFromScreen = startButton.getText().toString();
             String myFormat = "MM/dd/yy";
             SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US); //simple date format has good method for making mils (milliseconds since start of time)
             Date myStartDate = null;
             try {
-                myStartDate = sdf.parse(dateFromScreen);
+                myStartDate = sdf.parse(startDateFromScreen);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -303,24 +303,17 @@ public class VacationDetails extends AppCompatActivity {
             //will need to create a vacation end later
             intentStart.putExtra("start", "Your vacation to " + vacation.getVacationName() + " is starting!");
             //numVacStartAlert has to be different for each alert sent
-            PendingIntent senderStart =PendingIntent.getBroadcast(VacationDetails.this, ++MainActivity.numVacStartAlert, intentStart, PendingIntent.FLAG_ONE_SHOT); //if FLAG_IMMUTABLE does not work, try FLAG_ONE_SHOT
+            PendingIntent senderStart =PendingIntent.getBroadcast(VacationDetails.this, ++MainActivity.numVacAlert, intentStart, PendingIntent.FLAG_IMMUTABLE); //if FLAG_IMMUTABLE does not work, try FLAG_ONE_SHOT
             //get alarm to show on app
             AlarmManager alarmStartManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
             alarmStartManager.set(AlarmManager.RTC_WAKEUP, startTrigger, senderStart);
 
-            return true;
-        }
-        //notification for vacation (END)
-        if (item.getItemId() == R.id.notify){
-            Vacation vacation;
-            vacation = new Vacation(vacationID, editName.getText().toString(), editHotel.getText().toString(), startButton.getText().toString(), endButton.getText().toString());
+
             //pull date from the string for END DATE
-            String dateFromScreen = endButton.getText().toString();
-            String myFormat = "MM/dd/yy";
-            SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US); //simple date format has good method for making mils (milliseconds since start of time)
+            String endDateFromScreen = endButton.getText().toString();
             Date myEndDate = null;
             try {
-                myEndDate = sdf.parse(dateFromScreen);
+                myEndDate = sdf.parse(endDateFromScreen);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -330,13 +323,41 @@ public class VacationDetails extends AppCompatActivity {
             //will need to create a vacation end later
             intentEnd.putExtra("end", "Your vacation to " + vacation.getVacationName() + " ends today!");
             //numVacStartAlert has to be different for each alert sent
-            PendingIntent senderEnd =PendingIntent.getBroadcast(VacationDetails.this, ++MainActivity.numVacEndAlert, intentEnd, PendingIntent.FLAG_ONE_SHOT); //if FLAG_IMMUTABLE does not work, try FLAG_ONE_SHOT
+            PendingIntent senderEnd =PendingIntent.getBroadcast(VacationDetails.this, ++MainActivity.numVacAlert, intentEnd, PendingIntent.FLAG_IMMUTABLE); //if FLAG_IMMUTABLE does not work, try FLAG_ONE_SHOT
             //get alarm to show on app
             AlarmManager alarmEndManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
             alarmEndManager.set(AlarmManager.RTC_WAKEUP, endTrigger, senderEnd);
 
+
             return true;
         }
+        //notification for vacation (END)
+//        if (item.getItemId() == R.id.notify){
+//            Vacation vacation;
+//            vacation = new Vacation(vacationID, editName.getText().toString(), editHotel.getText().toString(), startButton.getText().toString(), endButton.getText().toString());
+//            //pull date from the string for END DATE
+//            String dateFromScreen = endButton.getText().toString();
+//            String myFormat = "MM/dd/yy";
+//            SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US); //simple date format has good method for making mils (milliseconds since start of time)
+//            Date myEndDate = null;
+//            try {
+//                myEndDate = sdf.parse(dateFromScreen);
+//            } catch (ParseException e) {
+//                e.printStackTrace();
+//            }
+//            Long endTrigger = myEndDate.getTime();
+//            //intent that goes to broadcast receiver
+//            Intent intentEnd = new Intent(VacationDetails.this, MyReceiver.class);
+//            //will need to create a vacation end later
+//            intentEnd.putExtra("end", "Your vacation to " + vacation.getVacationName() + " ends today!");
+//            //numVacStartAlert has to be different for each alert sent
+//            PendingIntent senderEnd =PendingIntent.getBroadcast(VacationDetails.this, ++MainActivity.numVacEndAlert, intentEnd, PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE); //if FLAG_IMMUTABLE does not work, try FLAG_ONE_SHOT
+//            //get alarm to show on app
+//            AlarmManager alarmEndManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+//            alarmEndManager.set(AlarmManager.RTC_WAKEUP, endTrigger, senderEnd);
+//
+//            return true;
+//        }
         return true;
     }
 }
