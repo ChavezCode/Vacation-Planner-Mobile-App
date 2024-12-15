@@ -331,33 +331,25 @@ public class VacationDetails extends AppCompatActivity {
 
             return true;
         }
-        //notification for vacation (END)
-//        if (item.getItemId() == R.id.notify){
-//            Vacation vacation;
-//            vacation = new Vacation(vacationID, editName.getText().toString(), editHotel.getText().toString(), startButton.getText().toString(), endButton.getText().toString());
-//            //pull date from the string for END DATE
-//            String dateFromScreen = endButton.getText().toString();
-//            String myFormat = "MM/dd/yy";
-//            SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US); //simple date format has good method for making mils (milliseconds since start of time)
-//            Date myEndDate = null;
-//            try {
-//                myEndDate = sdf.parse(dateFromScreen);
-//            } catch (ParseException e) {
-//                e.printStackTrace();
-//            }
-//            Long endTrigger = myEndDate.getTime();
-//            //intent that goes to broadcast receiver
-//            Intent intentEnd = new Intent(VacationDetails.this, MyReceiver.class);
-//            //will need to create a vacation end later
-//            intentEnd.putExtra("end", "Your vacation to " + vacation.getVacationName() + " ends today!");
-//            //numVacStartAlert has to be different for each alert sent
-//            PendingIntent senderEnd =PendingIntent.getBroadcast(VacationDetails.this, ++MainActivity.numVacEndAlert, intentEnd, PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE); //if FLAG_IMMUTABLE does not work, try FLAG_ONE_SHOT
-//            //get alarm to show on app
-//            AlarmManager alarmEndManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-//            alarmEndManager.set(AlarmManager.RTC_WAKEUP, endTrigger, senderEnd);
-//
-//            return true;
-//        }
+        //sharing vacation details
+        if (item.getItemId() == R.id.sharing) {
+            Vacation vacation;
+            vacation = new Vacation(vacationID, editName.getText().toString(), editHotel.getText().toString(), startButton.getText().toString(), endButton.getText().toString());
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            sendIntent.putExtra(Intent.EXTRA_TEXT,
+                    "Vacation name: " + vacation.getVacationName() +
+                    " Vacation Date range: " + vacation.getStartDate() + " - " + vacation.getEndDate() +
+                    " Will be staying at: " + vacation.getHotel() + ".");
+            sendIntent.putExtra(Intent.EXTRA_TITLE, "Vacation Details to " + vacation.getVacationName());
+            sendIntent.setType("text/plain");
+
+            Intent shareIntent = Intent.createChooser(sendIntent, null);
+            startActivity(shareIntent);
+            return true;
+        }
+
+
         return true;
     }
 }

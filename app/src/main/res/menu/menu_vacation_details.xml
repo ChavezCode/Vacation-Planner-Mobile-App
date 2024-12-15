@@ -12,5 +12,8 @@
 
     <item
         android:id="@+id/notify"
-        android:title="Create Notification" />
+        android:title="Set reminder" />
+    <item
+        android:id="@+id/sharing"
+        android:title="Share details" />
 </menu>
