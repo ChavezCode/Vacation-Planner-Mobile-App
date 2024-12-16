@@ -232,12 +232,11 @@ public class VacationDetails extends AppCompatActivity {
                 } else {
                     //make it the last  ID in the database plus 1
                     vacationID = repository.getmAllVacations().get(repository.getmAllVacations().size() - 1).getVacationID() + 1;
-                    //make new vacation
-                    vacation = new Vacation(vacationID, editName.getText().toString(), editHotel.getText().toString(), startButton.getText().toString(), endButton.getText().toString());
-                    repository.insert(vacation);
-                    this.finish();
                 }
-
+                //make new vacation
+                vacation = new Vacation(vacationID, editName.getText().toString(), editHotel.getText().toString(), startButton.getText().toString(), endButton.getText().toString());
+                repository.insert(vacation);
+                this.finish();
 
 
 

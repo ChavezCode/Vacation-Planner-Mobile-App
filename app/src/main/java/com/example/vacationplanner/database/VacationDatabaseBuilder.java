@@ -14,7 +14,7 @@ import com.example.vacationplanner.entities.Vacation;
 
 
 //need to build the enetities first to build db
-@Database(entities = {Vacation.class, Excursion.class}, version = 3, exportSchema = false)
+@Database(entities = {Vacation.class, Excursion.class}, version = 4, exportSchema = false)
 public abstract class VacationDatabaseBuilder extends RoomDatabase {
     //insert vacationDao, excursiondao and instance of DB to build it
     public abstract VacationDAO vacationDAO();
