@@ -6,6 +6,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,6 +32,8 @@ public class ExcursionDetails extends AppCompatActivity {
     int vacationID;
     int excursionID;
     String excursionName;
+    String date;
+    EditText editName;
     Button startButton;
     DatePickerDialog.OnDateSetListener myStartDate;
     final Calendar myStartCalendar = Calendar.getInstance();
@@ -66,6 +70,26 @@ public class ExcursionDetails extends AppCompatActivity {
                         , myStartCalendar.get(Calendar.MONTH), myStartCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
+        //format and set each year, month, day
+        myStartDate = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                myStartCalendar.set(Calendar.YEAR, year);
+                myStartCalendar.set(Calendar.MONTH, month);
+                myStartCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel();
+            }
+        };
+
+        editName = findViewById(R.id.excursionName);
+        excursionID = getIntent().getIntExtra("id", -1);
+        //populate info from recycler into details page
+        excursionName = getIntent().getStringExtra("name");
+        date = getIntent().getStringExtra("date");
+
+        editName.setText(excursionName);
+        startButton.setText(date);
+
 
 
     }
@@ -75,6 +99,12 @@ public class ExcursionDetails extends AppCompatActivity {
         return true;
     }
 
+    //method to update button label once date is picked
+    private void updateLabel(){
+        String myFormat = "MM/dd/yy";
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+        startButton.setText(sdf.format(myStartCalendar.getTime()));
+    }
 
 
 
