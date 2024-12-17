@@ -83,6 +83,8 @@ public class ExcursionDetails extends AppCompatActivity {
                 updateLabel();
             }
         };
+
+
         repository = new Repository(getApplication());
         editName = findViewById(R.id.excursionName);
         excursionID = getIntent().getIntExtra("id", -1);
@@ -119,6 +121,7 @@ public class ExcursionDetails extends AppCompatActivity {
         if (item.getItemId() == R.id.excursionSave) {
             //if excursion is a new item
             Excursion excursion;
+             vacationID = repository.getmAllVacations().get(repository.getmAllVacations().size() - 1).getVacationID();
 
             if (excursionID == -1) {
 

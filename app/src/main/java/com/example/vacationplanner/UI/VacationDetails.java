@@ -186,7 +186,7 @@ public class VacationDetails extends AppCompatActivity {
         //only excursions that are in the current vacation item
         excursionAdapter.setExcurions(filteredExcursions);
         //gets all excursions
-        //excursionAdapter.setExcurions(allExcursions);
+        //excursionAdapter.setExcursions(allExcursions);
 
 
     }
