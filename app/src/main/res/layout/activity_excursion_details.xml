@@ -37,6 +37,11 @@
                     android:layout_height="50dp"
                     android:hint="Sky Dive"></EditText>
             </LinearLayout>
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"></Spinner>
         </LinearLayout>
     </ScrollView>
 

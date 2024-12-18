@@ -5,9 +5,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +25,7 @@ import com.example.vacationplanner.entities.Vacation;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -94,6 +98,34 @@ public class ExcursionDetails extends AppCompatActivity {
         excursionName = getIntent().getStringExtra("name");
         date = getIntent().getStringExtra("date");
 
+        //an onItemSelectedListener interface defined an onItemSeleceted(); callback that is called when an item is selected
+        //has four parameters
+        //parent - The AdapterView where the selection happened
+        //view - The view within the AdapterView that was selected
+        //position - The position of the view in the adapter
+        //id - The row id of the selected item
+
+        Spinner spinner = findViewById(R.id.spinner);
+        ArrayList<Vacation> vacationArrayList = new ArrayList();
+        vacationArrayList.addAll(repository.getmAllVacations());
+        ArrayList<Integer> vacationIdList = new ArrayList<>();
+        for (Vacation vacation : vacationArrayList) {
+            vacationIdList.add(vacation.getVacationID());
+        }
+        ArrayAdapter<Integer> vacationIDAdapter = new ArrayAdapter<Integer>(this, android.R.layout.simple_spinner_item, vacationIdList);
+        spinner.setAdapter(vacationIDAdapter);
+//        spinner.setSelection(vacationID - 1);
+        spinner.setOnItemSelectedListener (new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View v, int position, long id){
+                vacationID = vacationIdList.get(position);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+
         editName.setText(excursionName);
         startButton.setText(date);
 
@@ -113,6 +145,11 @@ public class ExcursionDetails extends AppCompatActivity {
         return true;
     }
 
+
+
+
+
+
     //menu item features
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -121,20 +158,19 @@ public class ExcursionDetails extends AppCompatActivity {
         if (item.getItemId() == R.id.excursionSave) {
             //if excursion is a new item
             Excursion excursion;
-             vacationID = repository.getmAllVacations().get(repository.getmAllVacations().size() - 1).getVacationID();
 
             if (excursionID == -1) {
-
                 if (repository.getmAllExcursion().size() == 0) {
                     //then it's a new excursion if it's zero
                     excursionID = 1;
                 } else {
                     //last id in db plus one
                     excursionID = repository.getmAllExcursion().get(repository.getmAllExcursion().size() - 1).getExcursionID() + 1;
+
+                    //make a new excursion item
+                    excursion = new Excursion(excursionID, editName.getText().toString(), startButton.getText().toString(), vacationID);
+                    repository.insert(excursion);
                 }
-                //make a new excursion item
-                excursion = new Excursion(excursionID, editName.getText().toString(), startButton.getText().toString(), vacationID);
-                repository.insert(excursion);
             } else {
                 //if excursionID exists update
 

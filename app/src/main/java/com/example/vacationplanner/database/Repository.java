@@ -21,7 +21,7 @@ public class Repository {
     private static int NUMBER_OF_THREADS=4;
     static final ExecutorService databaseExecutor= Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
-    //run database builder to get instance of db. if db iexists, then we will get existing instance of db.
+    //run database builder to get instance of db. if db exists, then we will get existing instance of db.
     public Repository(Application application) {
         VacationDatabaseBuilder db=VacationDatabaseBuilder.getDatabase(application);
         mExcursionDAO=db.excursionDAO();
