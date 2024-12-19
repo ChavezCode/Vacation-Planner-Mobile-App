@@ -212,6 +212,31 @@ public class VacationDetails extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_vacation_details, menu);
         return true;
     }
+    //want the screen to update after excursion items have been added to a vacation
+    @Override
+    public void onResume(){
+
+        super.onResume();
+        //on resume gets products from the db and ads them to the recyclerview again (kinda like a refresh)
+        //turns on recycler view in vacation list and details
+        RecyclerView recyclerView = findViewById(R.id.vacationrecyclerview);
+        repository = new Repository(getApplication());
+        List<Excursion> allExcursions = repository.getmAllExcursion();
+        final ExcursionAdapter excursionAdapter = new ExcursionAdapter(this);
+        recyclerView.setAdapter(excursionAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        //to filter by ID
+        List<Excursion> filteredExcursions = new ArrayList<>();
+        for (Excursion ex : repository.getmAllExcursion()) {
+            if (ex.getVacationID() == vacationID) {
+                filteredExcursions.add(ex);
+            }
+        }
+        //only excursions that are in the current vacation item
+        excursionAdapter.setExcurions(filteredExcursions);
+        //gets all excursions
+        //excursionAdapter.setExcursions(allExcursions);
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
