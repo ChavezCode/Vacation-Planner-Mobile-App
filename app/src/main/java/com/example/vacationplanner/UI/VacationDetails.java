@@ -74,6 +74,7 @@ public class VacationDetails extends AppCompatActivity {
         });
 
 
+
         FloatingActionButton fabExcursion = findViewById(R.id.fabVExcursionList);
 
         //start calendar button
@@ -165,6 +166,8 @@ public class VacationDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(VacationDetails.this, ExcursionDetails.class);
+                //pass the vacationID when selecting an excursion
+                intent.putExtra("vacaID", vacationID);
                 startActivity(intent);
             }
         });

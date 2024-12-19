@@ -44,6 +44,7 @@ public class ExcursionDetails extends AppCompatActivity {
     final Calendar myStartCalendar = Calendar.getInstance();
 
     Boolean validDate;
+    Spinner spinner;
 
 
     @Override
@@ -98,33 +99,42 @@ public class ExcursionDetails extends AppCompatActivity {
         excursionName = getIntent().getStringExtra("name");
         date = getIntent().getStringExtra("date");
 
-        //an onItemSelectedListener interface defined an onItemSeleceted(); callback that is called when an item is selected
-        //has four parameters
-        //parent - The AdapterView where the selection happened
-        //view - The view within the AdapterView that was selected
-        //position - The position of the view in the adapter
-        //id - The row id of the selected item
 
-        Spinner spinner = findViewById(R.id.spinner);
-        ArrayList<Vacation> vacationArrayList = new ArrayList();
-        vacationArrayList.addAll(repository.getmAllVacations());
-        ArrayList<Integer> vacationIdList = new ArrayList<>();
-        for (Vacation vacation : vacationArrayList) {
-            vacationIdList.add(vacation.getVacationID());
-        }
-        ArrayAdapter<Integer> vacationIDAdapter = new ArrayAdapter<Integer>(this, android.R.layout.simple_spinner_item, vacationIdList);
-        spinner.setAdapter(vacationIDAdapter);
-//        spinner.setSelection(vacationID - 1);
-        spinner.setOnItemSelectedListener (new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View v, int position, long id){
-                vacationID = vacationIdList.get(position);
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
+//////////Spinner code. Commented out, not needed
+//        Spinner spinner = findViewById(R.id.spinner);
+//        List<Vacation> vacationList = repository.getmAllVacations();
+//        ArrayAdapter<Vacation> vacationAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, vacationList);
+//        vacationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+//        spinner.setAdapter(vacationAdapter);
 
+        // Set the spinner to default to the vacationID passed from the previous activity
+//        if (vacationID != -1) {
+//            for (int i = 0; i < vacationList.size(); i++) {
+//                if (vacationList.get(i).getVacationID() == vacationID) {
+//                    spinner.setSelection(i); // Set the spinner's default selected item
+//                    break;
+//                }
+//            }
+//        }
+//
+//        //an onItemSelectedListener interface defined an onItemSelected(); callback that is called when an item is selected
+//        //has four parameters
+//        //parent - The AdapterView where the selection happened
+//        //view - The view within the AdapterView that was selected
+//        //position - The position of the view in the adapter
+//        //id - The row id of the selected item
+//        spinner.setOnItemSelectedListener (new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+//                Vacation selectedVacation = (Vacation) parentView.getItemAtPosition(position);
+//                vacationID = selectedVacation.getVacationID();  // Update vacationID when selected item changes
+//            }
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//            }
+//        });
+
+//set excursion name and date
 
         editName.setText(excursionName);
         startButton.setText(date);
@@ -146,10 +156,6 @@ public class ExcursionDetails extends AppCompatActivity {
     }
 
 
-
-
-
-
     //menu item features
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -158,7 +164,6 @@ public class ExcursionDetails extends AppCompatActivity {
         if (item.getItemId() == R.id.excursionSave) {
             //if excursion is a new item
             Excursion excursion;
-
             if (excursionID == -1) {
                 if (repository.getmAllExcursion().size() == 0) {
                     //then it's a new excursion if it's zero
