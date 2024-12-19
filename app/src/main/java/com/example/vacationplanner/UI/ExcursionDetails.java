@@ -1,6 +1,10 @@
 package com.example.vacationplanner.UI;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -189,6 +193,30 @@ public class ExcursionDetails extends AppCompatActivity {
             excursion = new Excursion(excursionID, editName.getText().toString(), startButton.getText().toString(), vacationID);
             repository.delete(excursion);
             this.finish();
+        }
+//        set alert for excursion
+        if (item.getItemId() == R.id.excursionAlert) {
+            excursion = new Excursion(excursionID, editName.getText().toString(), startButton.getText().toString(), vacationID);
+            //pull date from the string for START DATE
+            String startDateFromScreen = startButton.getText().toString();
+            String myFormat = "MM/dd/yy";
+            SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US); //simple date format has good method for making mils (milliseconds since start of time)
+            Date myStartDate = null;
+            try {
+                myStartDate = sdf.parse(startDateFromScreen);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            Long startTrigger = myStartDate.getTime();
+            //intent that goes to broadcast receiver
+            Intent intentStart = new Intent(ExcursionDetails.this, MyReceiver.class);
+            //will need to create a vacation end later
+            intentStart.putExtra("start", "Your excursion " + excursion.getExcursionName() + " is starting!");
+            //numVacStartAlert has to be different for each alert sent
+            PendingIntent senderStart =PendingIntent.getBroadcast(ExcursionDetails.this, ++MainActivity.numVacAlert, intentStart, PendingIntent.FLAG_IMMUTABLE); //if FLAG_IMMUTABLE does not work, try FLAG_ONE_SHOT
+            //get alarm to show on app
+            AlarmManager alarmStartManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+            alarmStartManager.set(AlarmManager.RTC_WAKEUP, startTrigger, senderStart);
         }
         return true;
     }

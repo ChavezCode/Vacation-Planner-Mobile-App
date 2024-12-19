@@ -4,7 +4,9 @@
         android:id="@+id/excursionSave"
         android:title="Save" />
     <item
-
         android:id="@+id/excursionDelete"
         android:title="Delete" />
+    <item
+        android:id="@+id/excursionAlert"
+        android:title="Set reminder" />
 </menu>
