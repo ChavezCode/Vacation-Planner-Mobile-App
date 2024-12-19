@@ -93,7 +93,6 @@ public class ExcursionDetails extends AppCompatActivity {
         repository = new Repository(getApplication());
         editName = findViewById(R.id.excursionName);
         excursionID = getIntent().getIntExtra("id", -1);
-
         vacationID = getIntent().getIntExtra("vacaID", -1);
         //populate info from recycler into details page
         excursionName = getIntent().getStringExtra("name");

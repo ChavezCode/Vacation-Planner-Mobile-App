@@ -168,6 +168,7 @@ public class VacationDetails extends AppCompatActivity {
                 Intent intent = new Intent(VacationDetails.this, ExcursionDetails.class);
                 //pass the vacationID when selecting an excursion
                 intent.putExtra("vacaID", vacationID);
+                intent.putExtra("date", startDate);
                 startActivity(intent);
             }
         });
