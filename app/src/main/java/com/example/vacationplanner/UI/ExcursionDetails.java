@@ -160,10 +160,10 @@ public class ExcursionDetails extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         //add validation to make sure start date is within vacation date range
-
+        Excursion excursion;
         if (item.getItemId() == R.id.excursionSave) {
             //if excursion is a new item
-            Excursion excursion;
+
             if (excursionID == -1) {
                 if (repository.getmAllExcursion().size() == 0) {
                     //then it's a new excursion if it's zero
@@ -184,6 +184,12 @@ public class ExcursionDetails extends AppCompatActivity {
             }
             this.finish();
 
+        }
+        //delete excursions
+        if (item.getItemId() == R.id.excursionDelete) {
+            excursion = new Excursion(excursionID, editName.getText().toString(), startButton.getText().toString(), vacationID);
+            repository.delete(excursion);
+            this.finish();
         }
         return true;
     }
