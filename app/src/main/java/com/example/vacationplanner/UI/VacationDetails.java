@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -168,7 +169,9 @@ public class VacationDetails extends AppCompatActivity {
                 Intent intent = new Intent(VacationDetails.this, ExcursionDetails.class);
                 //pass the vacationID when selecting an excursion
                 intent.putExtra("vacaID", vacationID);
-                intent.putExtra("date", startDate);
+//                intent.putExtra("date", startDate);
+                intent.putExtra("startDates", startDate);
+                intent.putExtra("endDates", endDate);
                 startActivity(intent);
             }
         });
@@ -177,7 +180,8 @@ public class VacationDetails extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.vacationrecyclerview);
         repository = new Repository(getApplication());
         List<Excursion> allExcursions = repository.getmAllExcursion();
-        final ExcursionAdapter excursionAdapter = new ExcursionAdapter(this);
+        //add stardDate and endDate to ExcursionAdapter arguments to pass intents when making updates to excursion items
+        final ExcursionAdapter excursionAdapter = new ExcursionAdapter(this, startDate, endDate);
         recyclerView.setAdapter(excursionAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         //to filter by ID
@@ -222,7 +226,8 @@ public class VacationDetails extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.vacationrecyclerview);
         repository = new Repository(getApplication());
         List<Excursion> allExcursions = repository.getmAllExcursion();
-        final ExcursionAdapter excursionAdapter = new ExcursionAdapter(this);
+        //neeed to add 2 more arguments to pass them to excursion activity if clicked in recyclerview
+        final ExcursionAdapter excursionAdapter = new ExcursionAdapter(this, startDate, endDate);
         recyclerView.setAdapter(excursionAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         //to filter by ID
@@ -313,6 +318,11 @@ public class VacationDetails extends AppCompatActivity {
         }
         //notification for vacation (START and End)
         if (item.getItemId() == R.id.notify){
+            //date validation
+            if(!validDate){
+                Toast.makeText(VacationDetails.this, "Make sure your start day is before your end date or that your end date is after your start date!", Toast.LENGTH_LONG).show();
+                return false;
+            }
             Vacation vacation;
             vacation = new Vacation(vacationID, editName.getText().toString(), editHotel.getText().toString(), startButton.getText().toString(), endButton.getText().toString());
             //pull date from the string for START DATE

@@ -18,7 +18,11 @@ import java.util.List;
 public class ExcursionAdapter extends RecyclerView.Adapter<ExcursionAdapter.ExcursionViewHolder> {
     private List<Excursion> mExcursions;
     private final Context context;
+    private final String startDate;
+    private final String endDate;
     private final LayoutInflater mInflater;
+
+
 
     public class ExcursionViewHolder extends RecyclerView.ViewHolder {
         //we have two text views on the excursion list item layout
@@ -40,13 +44,18 @@ public class ExcursionAdapter extends RecyclerView.Adapter<ExcursionAdapter.Excu
                     intent.putExtra("name", current.getExcursionName());
                     intent.putExtra("date", current.getDate());
                     intent.putExtra("vacaID", current.getVacationID());
+                    // pass start and end dates (vacation) for validations
+                    intent.putExtra("startDates", startDate);
+                    intent.putExtra("endDates", endDate);
                     context.startActivity(intent);
                 }
             });
         }
     }
 
-    public ExcursionAdapter(Context context){
+    public ExcursionAdapter(Context context, String startDate, String endDate){
+        this.startDate = startDate;
+        this.endDate = endDate;
         mInflater= LayoutInflater.from(context);
         this.context=context;
     }

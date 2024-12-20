@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -44,11 +45,14 @@ public class ExcursionDetails extends AppCompatActivity {
     String date;
     EditText editName;
     Button startButton;
+    String vacaStartDate;
+    String vacaEndDate;
     DatePickerDialog.OnDateSetListener myStartDate;
     final Calendar myStartCalendar = Calendar.getInstance();
+    final Calendar myVacStartCalendar = Calendar.getInstance();
+    final Calendar myVacEndCalendar = Calendar.getInstance();
 
     Boolean validDate;
-    Spinner spinner;
 
 
     @Override
@@ -102,47 +106,38 @@ public class ExcursionDetails extends AppCompatActivity {
         excursionName = getIntent().getStringExtra("name");
         date = getIntent().getStringExtra("date");
 
+        //Testing, Dates not passing through if excursions clicked on recycler view
+        // Get start and end dates from the Intent as strings
+        vacaStartDate = getIntent().getStringExtra("startDates");
+        vacaEndDate = getIntent().getStringExtra("endDates");
 
-//////////Spinner code. Commented out, not needed
-//        Spinner spinner = findViewById(R.id.spinner);
-//        List<Vacation> vacationList = repository.getmAllVacations();
-//        ArrayAdapter<Vacation> vacationAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, vacationList);
-//        vacationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-//        spinner.setAdapter(vacationAdapter);
+        // Ensure that the dates are not null or empty
+        if (vacaStartDate != null && !vacaStartDate.isEmpty()) {
+            try {
+                myVacStartCalendar.setTime(sdf.parse(vacaStartDate));
+            } catch (ParseException e) {
+                e.printStackTrace();
+                Toast.makeText(this, "Invalid start date format", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(this, "Start date is missing", Toast.LENGTH_SHORT).show();
+        }
 
-        // Set the spinner to default to the vacationID passed from the previous activity
-//        if (vacationID != -1) {
-//            for (int i = 0; i < vacationList.size(); i++) {
-//                if (vacationList.get(i).getVacationID() == vacationID) {
-//                    spinner.setSelection(i); // Set the spinner's default selected item
-//                    break;
-//                }
-//            }
-//        }
-//
-//        //an onItemSelectedListener interface defined an onItemSelected(); callback that is called when an item is selected
-//        //has four parameters
-//        //parent - The AdapterView where the selection happened
-//        //view - The view within the AdapterView that was selected
-//        //position - The position of the view in the adapter
-//        //id - The row id of the selected item
-//        spinner.setOnItemSelectedListener (new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-//                Vacation selectedVacation = (Vacation) parentView.getItemAtPosition(position);
-//                vacationID = selectedVacation.getVacationID();  // Update vacationID when selected item changes
-//            }
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//            }
-//        });
+        if (vacaEndDate != null && !vacaEndDate.isEmpty()) {
+            try {
+                myVacEndCalendar.setTime(sdf.parse(vacaEndDate));
+            } catch (ParseException e) {
+                e.printStackTrace();
+                Toast.makeText(this, "Invalid end date format", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(this, "End date is missing", Toast.LENGTH_SHORT).show();
+        }
 
-//set excursion name and date
 
+        //set excursion name and date
         editName.setText(excursionName);
         startButton.setText(date);
-
-
     }
 
     //method to update button label once date is picked
@@ -163,19 +158,27 @@ public class ExcursionDetails extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         //add validation to make sure start date is within vacation date range
-        Excursion excursion;
+
         if (item.getItemId() == R.id.excursionSave) {
             //if excursion is a new item
-
+            validDate = myStartCalendar.after(myVacStartCalendar) && myStartCalendar.before(myVacEndCalendar);
+            if (!validDate) {
+                Toast.makeText(ExcursionDetails.this, "Start date does not fall within your vacation dates!", Toast.LENGTH_LONG).show();
+                return false;
+            }
+            Excursion excursion;
             if (excursionID == -1) {
                 if (repository.getmAllExcursion().size() == 0) {
                     //then it's a new excursion if it's zero
                     excursionID = 1;
+                    //make a new excursion item
+                    excursion = new Excursion(excursionID, editName.getText().toString(), startButton.getText().toString(), vacationID);
+                    repository.insert(excursion);
                 } else {
                     //last id in db plus one
                     excursionID = repository.getmAllExcursion().get(repository.getmAllExcursion().size() - 1).getExcursionID() + 1;
 
-                    //make a new excursion item
+                    //add excursion to db
                     excursion = new Excursion(excursionID, editName.getText().toString(), startButton.getText().toString(), vacationID);
                     repository.insert(excursion);
                 }
@@ -190,12 +193,14 @@ public class ExcursionDetails extends AppCompatActivity {
         }
         //delete excursions
         if (item.getItemId() == R.id.excursionDelete) {
+            Excursion excursion;
             excursion = new Excursion(excursionID, editName.getText().toString(), startButton.getText().toString(), vacationID);
             repository.delete(excursion);
             this.finish();
         }
 //        set alert for excursion
         if (item.getItemId() == R.id.excursionAlert) {
+            Excursion excursion;
             excursion = new Excursion(excursionID, editName.getText().toString(), startButton.getText().toString(), vacationID);
             //pull date from the string for START DATE
             String startDateFromScreen = startButton.getText().toString();
@@ -213,7 +218,7 @@ public class ExcursionDetails extends AppCompatActivity {
             //will need to create a vacation end later
             intentStart.putExtra("start", "Your excursion " + excursion.getExcursionName() + " is starting!");
             //numVacStartAlert has to be different for each alert sent
-            PendingIntent senderStart =PendingIntent.getBroadcast(ExcursionDetails.this, ++MainActivity.numVacAlert, intentStart, PendingIntent.FLAG_IMMUTABLE); //if FLAG_IMMUTABLE does not work, try FLAG_ONE_SHOT
+            PendingIntent senderStart = PendingIntent.getBroadcast(ExcursionDetails.this, ++MainActivity.numVacAlert, intentStart, PendingIntent.FLAG_IMMUTABLE); //if FLAG_IMMUTABLE does not work, try FLAG_ONE_SHOT
             //get alarm to show on app
             AlarmManager alarmStartManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
             alarmStartManager.set(AlarmManager.RTC_WAKEUP, startTrigger, senderStart);
