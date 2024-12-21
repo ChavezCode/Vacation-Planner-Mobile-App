@@ -153,6 +153,28 @@ public class VacationDetails extends AppCompatActivity {
         hotel = getIntent().getStringExtra("hotel");
         startDate = getIntent().getStringExtra("startdate");
         endDate = getIntent().getStringExtra("enddate");
+        // Ensure that the dates are not null or empty
+        if (startDate != null && !startDate.isEmpty()) {
+            try {
+                myStartCalendar.setTime(sdf.parse(startDate));
+            } catch (ParseException e) {
+                e.printStackTrace();
+                Toast.makeText(this, "Invalid start date format", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(this, "Start date is missing", Toast.LENGTH_SHORT).show();
+        }
+
+        if (endDate != null && !endDate.isEmpty()) {
+            try {
+                myEndCalendar.setTime(sdf.parse(endDate));
+            } catch (ParseException e) {
+                e.printStackTrace();
+                Toast.makeText(this, "Invalid end date format", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(this, "End date is missing", Toast.LENGTH_SHORT).show();
+        }
 
         editName.setText(vacationName);
         editHotel.setText(hotel);
@@ -245,7 +267,7 @@ public class VacationDetails extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        validDate = myEndCalendar.after(myStartCalendar);
+        validDate = myEndCalendar.after(myStartCalendar) && myStartCalendar.before(myEndCalendar);
         if (item.getItemId() == R.id.savevacation) {
             //date validation
             if(!validDate){
@@ -384,6 +406,10 @@ public class VacationDetails extends AppCompatActivity {
 
             Intent shareIntent = Intent.createChooser(sendIntent, null);
             startActivity(shareIntent);
+            return true;
+        }
+        if(item.getItemId()==android.R.id.home){
+            this.finish();
             return true;
         }
 

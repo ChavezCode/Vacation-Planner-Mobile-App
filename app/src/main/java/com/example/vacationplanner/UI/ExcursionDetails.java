@@ -223,6 +223,10 @@ public class ExcursionDetails extends AppCompatActivity {
             AlarmManager alarmStartManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
             alarmStartManager.set(AlarmManager.RTC_WAKEUP, startTrigger, senderStart);
         }
+        if(item.getItemId()==android.R.id.home){
+            this.finish();
+            return true;
+        }
         return true;
     }
 
