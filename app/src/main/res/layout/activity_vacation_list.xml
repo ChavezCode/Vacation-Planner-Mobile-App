@@ -3,6 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
+    android:background="#ACC8E5"
+    android:textColor="#112A46"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".UI.VacationList">

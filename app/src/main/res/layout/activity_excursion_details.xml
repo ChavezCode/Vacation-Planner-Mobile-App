@@ -5,13 +5,15 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.ExcursionDetails">
+    tools:context=".UI.ExcursionDetails"
+    android:background="#ACC8E5"
+    android:textColor="#112A46">
 
     <ScrollView
         android:id="@+id/scrollviewExcursion"
         android:layout_width="446dp"
         android:layout_height="100dp"
-        android:background="#4CAF50"
+        android:background="#112A46"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -29,13 +31,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:padding="10dp"
+                    android:textColor="#ACC8E5"
                     android:text="Title: "></TextView>
 
                 <EditText
                     android:id="@+id/excursionName"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
-                    android:hint="Sky Dive"></EditText>
+                    android:textColor="#ACC8E5"
+                    android:hint="Sky Dive"
+                    android:textColorHint="@color/design_default_color_error"></EditText>
             </LinearLayout>
 
 <!--            <Spinner-->
