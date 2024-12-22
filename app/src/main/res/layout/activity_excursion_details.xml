@@ -56,7 +56,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:layout_weight="1"
-        android:text="Start Date"
+        android:hint="Start Date"
+        android:backgroundTint="#112A46"
+        android:textColorHint="@color/design_default_color_error"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scrollviewExcursion" />

@@ -18,7 +18,7 @@
         android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/add" />
+        app:srcCompat="@drawable/add_box_24" />
 <ScrollView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

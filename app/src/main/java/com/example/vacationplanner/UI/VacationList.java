@@ -91,12 +91,12 @@ private Repository repository;
             repository=new Repository(getApplication());
             //notification in app
 //            Toast.makeText(VacationList.this, "put in sample data", Toast.LENGTH_LONG).show();
-            Vacation vacation=new Vacation(0,"Hawaii", "HolidayInn", "11/12/12","11/12/12");
+            Vacation vacation=new Vacation(0,"Hawaii", "HolidayInn", "12/21/24","12/31/24");
             repository.insert(vacation);
-            vacation=new Vacation(0,"New York", "HolidayInn", "11/12/12","11/12/12");
-            Excursion excursion=new Excursion(0,"kayak", "11/12/12", vacation.getVacationID());
+            vacation=new Vacation(0,"New York", "HolidayInn", "12/21/24","12/31/24");
+            Excursion excursion=new Excursion(0,"kayak", "12/25/24", vacation.getVacationID());
             repository.insert(excursion);
-            excursion=new Excursion(0,"snorkel", "11/12/12", vacation.getVacationID());
+            excursion=new Excursion(0,"snorkel", "12/25/24", vacation.getVacationID());
             repository.insert(excursion);
 
             return true;

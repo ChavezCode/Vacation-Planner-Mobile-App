@@ -4,9 +4,5 @@
 
     <item
         android:id="@+id/sample"
-        android:title="Save Vacation" />
-    <item
-
-        android:id="@+id/sampleTwo"
-        android:title="Destination 2" />
+        android:title="Add Sample Data" />
 </menu>

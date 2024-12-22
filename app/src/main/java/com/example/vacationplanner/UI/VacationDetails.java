@@ -180,7 +180,6 @@ public class VacationDetails extends AppCompatActivity {
         editHotel.setText(hotel);
 
         startButton.setText(startDate);
-
         endButton.setText(endDate);
 
 
