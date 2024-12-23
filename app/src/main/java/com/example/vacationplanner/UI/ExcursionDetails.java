@@ -196,7 +196,7 @@ public class ExcursionDetails extends AppCompatActivity {
             Excursion excursion;
             excursion = new Excursion(excursionID, editName.getText().toString(), startButton.getText().toString(), vacationID);
             repository.delete(excursion);
-            Toast.makeText(ExcursionDetails.this, excursion.getExcursionName() + " was deleted", Toast.LENGTH_LONG).show();
+            Toast.makeText(ExcursionDetails.this, "Your excursion " + excursion.getExcursionName() + " was deleted", Toast.LENGTH_LONG).show();
             this.finish();
         }
 //        set alert for excursion
