@@ -161,7 +161,7 @@ public class ExcursionDetails extends AppCompatActivity {
 
         if (item.getItemId() == R.id.excursionSave) {
             //if excursion is a new item
-            validDate = myStartCalendar.after(myVacStartCalendar) && myStartCalendar.before(myVacEndCalendar);
+            validDate = myStartCalendar.equals(myVacStartCalendar) || myStartCalendar.after(myVacStartCalendar) && myStartCalendar.before(myVacEndCalendar) || myStartCalendar.equals(myVacEndCalendar);
             if (!validDate) {
                 Toast.makeText(ExcursionDetails.this, "Start date does not fall within your vacation dates!", Toast.LENGTH_LONG).show();
                 return false;
@@ -196,6 +196,7 @@ public class ExcursionDetails extends AppCompatActivity {
             Excursion excursion;
             excursion = new Excursion(excursionID, editName.getText().toString(), startButton.getText().toString(), vacationID);
             repository.delete(excursion);
+            Toast.makeText(ExcursionDetails.this, excursion.getExcursionName() + " was deleted", Toast.LENGTH_LONG).show();
             this.finish();
         }
 //        set alert for excursion
