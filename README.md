@@ -1,16 +1,16 @@
-Title: Vacation Planner Mobile App
+#Title: Vacation Planner Mobile App
 ____________________________________________________________________________________
 The purpose of this mobile application is to help make vacation planning easier to track and manage. The Vacation Planner app allows users to enter, edit, and delete as many vacations as possible and excursions for each if necessary. The app will enable users to set alerts and share details via SMS, e-mail, or clip vacation details. 
 
 
-BASIC INTRUCTIONS:
+##BASIC INTRUCTIONS:
 ________________________________________________________________________
 The project must be built and run using Android Studio with an emulator or phone with a minimum SDK/API level of 21.  
 The following steps go through how to work the app:
 
 1. Click on the "Let's Start Planning!" button in the main activity. 
 2. Click the add button in the bottom right corner to add a vacation. 
-	a. The button routes the user to a different page named Vacation Details.
+- 	a. The button routes the user to a different page named Vacation Details.
 3. There will be two fields to fill out on the Vacation Details page. The first field takes the name of the vacation, and the second field takes the name of the hotel or other place of stay.
 4. Click on the "Start Date" button and select a start date for the vacation. 
 5. Click on the "End Date" button and select an end date. The end date will need to be after your start date. Otherwise, it will not save, and an alert will pop up. 
@@ -41,11 +41,11 @@ a. Clicking delete will route the user back to the vacation details page. Notice
 
 ______________________________________________________________________________________________________________________
 
-APK DEPOLOYED AND SINED TO:
+##APK DEPOLOYED AND SINED TO:
 ANDROID STUDIO LADYBUG 2024.2.1 with a Targetsdk of 34.  
 
 ______________________________________________________________________________________________________________________
 
-PROJECT CAN BE FOUND HERE:
+##PROJECT CAN BE FOUND HERE:
 
-git@gitlab.com:wgu-gitlab-environment/student-repos/jch1248/d308-mobile-application-development-android.git
+[git@gitlab.com:wgu-gitlab-environment/student-repos/jch1248/d308-mobile-application-development-android.git]
