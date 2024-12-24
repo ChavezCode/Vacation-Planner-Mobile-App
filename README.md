@@ -48,4 +48,4 @@ ________________________________________________________________________________
 
 ## PROJECT CAN BE FOUND HERE:
 
-git@gitlab.com:wgu-gitlab-environment/student-repos/jch1248/d308-mobile-application-development-android.git
+`git@gitlab.com:wgu-gitlab-environment/student-repos/jch1248/d308-mobile-application-development-android.git`
