@@ -44,8 +44,6 @@ ________________________________________________________________________________
 ## APK DEPOLOYED AND SINED TO:
 ANDROID STUDIO LADYBUG 2024.2.1 with a Targetsdk of 34.  
 
-______________________________________________________________________________________________________________________
 
-## PROJECT CAN BE FOUND HERE:
 
-`git@gitlab.com:wgu-gitlab-environment/student-repos/jch1248/d308-mobile-application-development-android.git`
+
