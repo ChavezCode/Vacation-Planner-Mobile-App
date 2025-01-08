@@ -51,6 +51,8 @@ private VacationAdapter vacationAdapter;
                 startActivity(intent);
             }
         });
+        //query the db so define the repository
+        repository=new Repository(getApplication());
         //adding searchview
         searchView = findViewById(R.id.searchView);
         searchView.clearFocus();//removes cursor from searchview
@@ -67,8 +69,6 @@ private VacationAdapter vacationAdapter;
             }
         });
         RecyclerView recyclerView=findViewById(R.id.recyclerview);
-        //query the db so define the repository
-        repository=new Repository(getApplication());
         //get list of all the vacations
         vacationList=repository.getmAllVacations();
         vacationAdapter=new VacationAdapter(this);
@@ -113,7 +113,7 @@ private VacationAdapter vacationAdapter;
         //on resume gets products from the db and ads them to the recyclerview again (kinda like a refresh)
         List<Vacation> allVacations=repository.getmAllVacations();
         RecyclerView recyclerView=findViewById(R.id.recyclerview);
-        final VacationAdapter vacationAdapter=new VacationAdapter(this);
+//        final VacationAdapter vacationAdapter=new VacationAdapter(this);
         recyclerView.setAdapter(vacationAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         vacationAdapter.setVacations(allVacations);
