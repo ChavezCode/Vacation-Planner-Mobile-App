@@ -1,6 +1,7 @@
 package com.example.vacationplanner.UI;
 
 
+import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -30,6 +31,11 @@ public class VacationAdapter extends RecyclerView.Adapter<VacationAdapter.Vacati
     public VacationAdapter(Context context){
         mInflater= LayoutInflater.from(context);
         this.context=context;
+    }
+    //searchview set filtered list
+    public void setFilteredList (List<Vacation> filteredList){
+        this.mVacations = filteredList;
+        notifyDataSetChanged();
     }
 
     public class VacationViewHolder extends RecyclerView.ViewHolder {

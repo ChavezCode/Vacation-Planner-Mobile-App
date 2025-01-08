@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -21,10 +22,14 @@ import com.example.vacationplanner.entities.Excursion;
 import com.example.vacationplanner.entities.Vacation;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class VacationList extends AppCompatActivity {
 private Repository repository;
+private SearchView searchView;
+private List<Vacation> vacationList;
+private VacationAdapter vacationAdapter;
 
 
     @Override
@@ -46,21 +51,52 @@ private Repository repository;
                 startActivity(intent);
             }
         });
+        //adding searchview
+        searchView = findViewById(R.id.searchView);
+        searchView.clearFocus();//removes cursor from searchview
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterList(newText);
+                return true;
+            }
+        });
         RecyclerView recyclerView=findViewById(R.id.recyclerview);
         //query the db so define the repository
         repository=new Repository(getApplication());
         //get list of all the vacations
-        List<Vacation> allVacations=repository.getmAllVacations();
-        final VacationAdapter vacationAdapter=new VacationAdapter(this);
+        vacationList=repository.getmAllVacations();
+        vacationAdapter=new VacationAdapter(this);
         recyclerView.setAdapter(vacationAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         //put list of vacations onto recyclerview
-        vacationAdapter.setVacations(allVacations);
+        vacationAdapter.setVacations(vacationList);
 
         //to display the intent message in the main Activity class
         //System.out.println(getIntent().getStringExtra("test"));
 
     }
+//method to filter vacation list for search
+    private void filterList(String text) {
+        List<Vacation> filteredList = new ArrayList<>();
+        for (Vacation vacation : vacationList)
+            if (vacation.getVacationName().toLowerCase().contains(text.toLowerCase())){
+                filteredList.add(vacation);
+            }
+        if (filteredList.isEmpty()){
+            Toast.makeText(this,"No items found", Toast.LENGTH_SHORT).show();
+
+        }else{
+            vacationAdapter.setFilteredList(filteredList);
+
+        }
+    }
+
     //menu created in res file, adding it to the activity
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
