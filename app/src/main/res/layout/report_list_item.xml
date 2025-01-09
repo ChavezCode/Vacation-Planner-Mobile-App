@@ -18,33 +18,32 @@
         android:id="@+id/reportViewStay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginBottom="20dp"
-        android:layout_marginRight="10dp"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/reportViewName"/>
-<!--        app:layout_constraintStart_toEndOf="@+id/reportViewName" -->
+        app:layout_constraintStart_toEndOf="@+id/reportViewName" />
+
 
     <TextView
         android:id="@+id/reportViewStartDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginStart="8dp"
         android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/reportViewStay" />
+        app:layout_constraintStart_toEndOf="@id/reportViewStay" />
 
     <TextView
         android:id="@+id/reportViewEndDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginStart="8dp"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/reportViewStartDate" />
+        app:layout_constraintStart_toEndOf="@id/reportViewStartDate" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
