@@ -5,4 +5,7 @@
     <item
         android:id="@+id/sample"
         android:title="Add Sample Data" />
+    <item
+        android:id="@+id/report"
+        android:title="Generate Report" />
 </menu>

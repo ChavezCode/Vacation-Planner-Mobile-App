@@ -18,6 +18,10 @@
             android:enabled="true"
             android:exported="true"></receiver>
 
+        <activity android:name=".UI.Report"
+            android:label="Vacation Report"
+            android:exported="true"
+            android:parentActivityName=".UI.VacationList" />
         <activity
             android:name=".UI.ExcursionDetails"
             android:exported="false"

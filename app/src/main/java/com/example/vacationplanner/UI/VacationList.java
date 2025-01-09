@@ -142,6 +142,12 @@ private VacationAdapter vacationAdapter;
             this.finish();
             return true;
         }
+
+        //generate a report
+        if (item.getItemId()==R.id.report){
+            Intent intent = new Intent(VacationList.this, Report.class);
+            startActivity(intent);
+        }
         return true;
         
         
