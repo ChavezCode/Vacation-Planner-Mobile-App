@@ -65,6 +65,8 @@ public class VacationDetails extends AppCompatActivity {
 
     //DATE VALIDATION
     Boolean validDate;
+    //FIELD VALIDATION
+    Boolean emptyFields;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -270,11 +272,18 @@ public class VacationDetails extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        //check valid dates
         validDate = myEndCalendar.after(myStartCalendar) && myStartCalendar.before(myEndCalendar);
+        //check vacationname not blank
+        emptyFields = editName.getText().toString().isBlank() || editHotel.getText().toString().isBlank();;
         if (item.getItemId() == R.id.savevacation) {
             //date validation
             if(!validDate){
                 Toast.makeText(VacationDetails.this, "Make sure your start day is before your end date or that your end date is after your start date!", Toast.LENGTH_LONG).show();
+                return false;
+            }
+            if (emptyFields) {
+                Toast.makeText(VacationDetails.this, "Make sure both 'Title' and 'Stay' are not empty!", Toast.LENGTH_LONG).show();
                 return false;
             }
             Vacation vacation;
@@ -293,7 +302,7 @@ public class VacationDetails extends AppCompatActivity {
                     vacationID = repository.getmAllVacations().get(repository.getmAllVacations().size() - 1).getVacationID() + 1;
                 }
                 //make new vacation
-                vacation = new Vacation(vacationID, editName.getText().toString(), editHotel.getText().toString(), startButton.getText().toString(), endButton.getText().toString());
+                vacation = new Vacation(vacationID, editName.getText().toString().trim(), editHotel.getText().toString().trim(), startButton.getText().toString(), endButton.getText().toString());
                 repository.insert(vacation);
                 this.finish();
 
@@ -309,7 +318,7 @@ public class VacationDetails extends AppCompatActivity {
                 //new version with calendar button
                 //DATE VALIDATION
                 if (validDate) {
-                    vacation = new Vacation(vacationID, editName.getText().toString(), editHotel.getText().toString(), startButton.getText().toString(), endButton.getText().toString());
+                    vacation = new Vacation(vacationID, editName.getText().toString().trim(), editHotel.getText().toString().trim(), startButton.getText().toString(), endButton.getText().toString());
                     repository.update(vacation);
                     this.finish();
                 } else {
