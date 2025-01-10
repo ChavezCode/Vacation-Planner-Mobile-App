@@ -83,6 +83,12 @@ private VacationAdapter vacationAdapter;
     }
 //method to filter vacation list for search
     private void filterList(String text) {
+        //show all items if text is empty
+//        if (text.isEmpty()) {
+//            vacationAdapter.setFilteredList(vacationList);
+//            return;
+//        }
+        //search
         List<Vacation> filteredList = new ArrayList<>();
         for (Vacation vacation : vacationList)
             if (vacation.getVacationName().toLowerCase().contains(text.toLowerCase())){
@@ -110,14 +116,14 @@ private VacationAdapter vacationAdapter;
     public void onResume(){
 
         super.onResume();
-        //on resume gets products from the db and ads them to the recyclerview again (kinda like a refresh)
-        List<Vacation> allVacations=repository.getmAllVacations();
+        //on resume gets products from the db and adds them to the recyclerview again (kinda like a refresh)
+        vacationList=repository.getmAllVacations();
         RecyclerView recyclerView=findViewById(R.id.recyclerview);
-//        final VacationAdapter vacationAdapter=new VacationAdapter(this);
-        recyclerView.setAdapter(vacationAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        vacationAdapter.setVacations(allVacations);
+        vacationAdapter.setVacations(vacationList);
+
     }
+
 
     //to work with things on the menu
     @Override
@@ -149,8 +155,8 @@ private VacationAdapter vacationAdapter;
             startActivity(intent);
         }
         return true;
-        
-        
+
+
 
     }
 }
