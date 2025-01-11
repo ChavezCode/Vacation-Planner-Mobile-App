@@ -1,4 +1,4 @@
-Test
+
 # Title: Vacation Planner Mobile App
 ____________________________________________________________________________________
 The purpose of this mobile application is to help make vacation planning easier to track and manage. The Vacation Planner app allows users to enter, edit, and delete as many vacations as possible and excursions for each if necessary. The app will enable users to set alerts and share details via SMS, e-mail, or clip vacation details. 
