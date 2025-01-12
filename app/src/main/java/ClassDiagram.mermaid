@@ -1,0 +1,65 @@
+classDiagram
+    class ExcursionDAO {
+        + insert(Excursion excursion) void
+        + update(Excursion excursion) void
+        + delete(Excursion excursion) void
+        + getAllExcursions() List
+        + getAssociatedExcursions(int vaca) List
+    }
+
+    class VacationDAO {
+        + insert(Vacation vacation) void
+        + update(Vacation vacation) void
+        + delete(Vacation vacation) void
+        + getAllVacations() List
+    }
+
+    class Repository {
+        - mVacationDAO: VacationDAO
+        - mExcursionDAO: ExcursionDAO
+        + Repository(Application application)
+        + getmAllVacations() List
+        + insert(Vacation vacation) void
+        + update(Vacation vacation) void
+        + delete(Vacation vacation) void
+        + getmAllExcursion() List
+        + getAssociatedExcursion(int vacationID) List
+        + insert(Excursion excursion) void
+        + update(Excursion excursion) void
+        + delete(Excursion excursion) void
+    }
+
+    class VacationDatabaseBuilder {
+        + getDatabase(Application application) VacationDatabaseBuilder
+        + excursionDAO() ExcursionDAO
+        + vacationDAO() VacationDAO
+    }
+
+    class Excursion {
+        <<entity>>
+        - excursionID: int
+        - excursionName: String
+        + Excursion(int excursionID, String excursionName)
+        + getExcursionID() int
+        + getExcursionName() String
+    }
+
+    class Vacation {
+        <<entity>>
+        - vacationID: int
+        - vacationName: String
+        + Vacation(int vacationID, String vacationName)
+        + getVacationID() int
+        + getVacationName() String
+    }
+
+
+    Repository --> VacationDAO : Uses
+    Repository --> ExcursionDAO : Uses
+    Repository --> VacationDatabaseBuilder : Uses
+    VacationDAO --> Vacation : Manages
+    ExcursionDAO --> Excursion : Manages
+    VacationDatabaseBuilder --> ExcursionDAO : Provides
+    VacationDatabaseBuilder --> VacationDAO : Provides
+    Vacation "1" --> "0..*" Excursion
+
