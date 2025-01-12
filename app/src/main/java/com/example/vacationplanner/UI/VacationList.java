@@ -31,7 +31,6 @@ private SearchView searchView;
 private List<Vacation> vacationList;
 private VacationAdapter vacationAdapter;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
