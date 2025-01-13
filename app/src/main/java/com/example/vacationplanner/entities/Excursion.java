@@ -1,6 +1,7 @@
 package com.example.vacationplanner.entities;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "excursions")
@@ -13,6 +14,9 @@ public class Excursion {
     private int vacationID;
 
     //constructors
+    @Ignore
+    public Excursion() {
+    }
 
     public Excursion(int excursionID, String excursionName, String date, int vacationID) {
         this.excursionID = excursionID;

@@ -2,6 +2,7 @@ package com.example.vacationplanner.entities;
 
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "vacations")
@@ -16,6 +17,9 @@ public class Vacation {
 
 
     //add constructor
+    @Ignore
+    public Vacation() {
+    }
 
 
     public Vacation(int vacationID, String vacationName, String hotel, String startDate, String endDate) {
