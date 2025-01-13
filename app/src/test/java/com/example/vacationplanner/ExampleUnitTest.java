@@ -5,22 +5,10 @@ import org.junit.jupiter.api.DisplayName;
 
 import static org.junit.Assert.*;
 
-import android.app.Application;
-import android.os.Bundle;
 
-import androidx.lifecycle.LiveData;
-
-import com.example.vacationplanner.UI.VacationDetails;
-import com.example.vacationplanner.database.Repository;
 import com.example.vacationplanner.entities.Excursion;
 import com.example.vacationplanner.entities.Vacation;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
