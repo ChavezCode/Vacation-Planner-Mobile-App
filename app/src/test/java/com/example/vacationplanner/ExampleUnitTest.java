@@ -43,6 +43,7 @@ public class ExampleUnitTest {
         String Name = "Alaska";
         vacation.setVacationName(Name);
         assertNotNull("Vacation Name Should Not Be Empty",vacation.getVacationName());
+        assertEquals(Name, vacation.getVacationName());
     }
 
     //vacationID and excursion vacationID match
@@ -53,6 +54,7 @@ public class ExampleUnitTest {
         Excursion excursion = new Excursion(5, "Skydive", "1/12/25", 1);
         int vacationID = 1;
         vacation.setVacationID(vacationID);
+        assertNotNull("VacationID not null", excursion.getVacationID());
         assertEquals("Excursion vacation ID should match the VacationID",excursion.getVacationID(), vacation.getVacationID());
     }
 
