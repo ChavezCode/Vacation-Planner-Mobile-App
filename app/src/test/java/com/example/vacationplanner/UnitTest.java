@@ -5,20 +5,10 @@ import org.junit.jupiter.api.DisplayName;
 
 import static org.junit.Assert.*;
 
-
 import com.example.vacationplanner.entities.Excursion;
 import com.example.vacationplanner.entities.Vacation;
 
-
-/**
- * Example local unit test, which will execute on the development machine (host).
- *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
- */
 public class UnitTest {
-
-
-
     //setVacation
     @DisplayName("Test for checking the setVacation Method")
     @Test
@@ -28,10 +18,12 @@ public class UnitTest {
         vacation.setVacationName(Name);
         assertNotNull("Vacation Name Should Not Be Empty",vacation.getVacationName());
         assertEquals(Name, vacation.getVacationName());
+        assertEquals(Name, vacation.getVacationName());
+        System.out.println("setVacation test completed successfully");
     }
 
     //vacationID and excursion vacationID match
-    @DisplayName("Test for checking if setVacationID works for the vacation method as well as checks if the getVacationID method works for excursion and vacation classes")
+    @DisplayName("Test for checking if setVacationID, and getVacationID method works for excursion and vacation classes")
     @Test
     public void matchID() {
         Vacation vacation = new Vacation();
@@ -39,7 +31,8 @@ public class UnitTest {
         int vacationID = 1;
         vacation.setVacationID(vacationID);
         assertNotNull("VacationID not null", excursion.getVacationID());
-        assertEquals("Excursion vacation ID should match the VacationID",excursion.getVacationID(), vacation.getVacationID());
+        assertEquals(excursion.getVacationID(), vacation.getVacationID());
+        System.out.println("setVacationID and getVacationID test completed successfully");
     }
 
     @DisplayName("Test for checking the getExcursionID method")
@@ -49,8 +42,6 @@ public class UnitTest {
         int ID = 1;
         excursion.setExcursionID(ID);
         assertEquals("Excursion ID should be correct", 1, excursion.getExcursionID());
+        System.out.println("getExcursionID test completed successfully");
     }
-
-
-
 }
