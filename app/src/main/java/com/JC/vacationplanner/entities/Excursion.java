@@ -1,4 +1,4 @@
-package com.example.vacationplanner.entities;
+package com.JC.vacationplanner.entities;
 
 import androidx.room.Entity;
 import androidx.room.Ignore;

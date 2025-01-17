@@ -1,4 +1,4 @@
-package com.example.vacationplanner.UI;
+package com.JC.vacationplanner.UI;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,10 +16,10 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.vacationplanner.R;
-import com.example.vacationplanner.database.Repository;
-import com.example.vacationplanner.entities.Excursion;
-import com.example.vacationplanner.entities.Vacation;
+import com.JC.vacationplanner.R;
+import com.JC.vacationplanner.database.Repository;
+import com.JC.vacationplanner.entities.Excursion;
+import com.JC.vacationplanner.entities.Vacation;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;

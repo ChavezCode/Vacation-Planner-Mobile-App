@@ -1,4 +1,4 @@
-package com.example.vacationplanner.UI;
+package com.JC.vacationplanner.UI;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +11,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.vacationplanner.R;
+import com.JC.vacationplanner.R;
 
 public class MainActivity extends AppCompatActivity {
     //notifications for start and end date for vacations

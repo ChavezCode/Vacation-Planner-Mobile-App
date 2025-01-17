@@ -1,4 +1,4 @@
-package com.example.vacationplanner.UI;
+package com.JC.vacationplanner.UI;
 
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
@@ -9,12 +9,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -23,17 +20,14 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.vacationplanner.R;
-import com.example.vacationplanner.database.Repository;
-import com.example.vacationplanner.entities.Excursion;
-import com.example.vacationplanner.entities.Vacation;
+import com.JC.vacationplanner.R;
+import com.JC.vacationplanner.database.Repository;
+import com.JC.vacationplanner.entities.Excursion;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 public class ExcursionDetails extends AppCompatActivity {

@@ -1,4 +1,4 @@
-package com.example.vacationplanner.dao;
+package com.JC.vacationplanner.dao;
 
 
 import androidx.room.Dao;
@@ -8,7 +8,7 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.example.vacationplanner.entities.Vacation;
+import com.JC.vacationplanner.entities.Vacation;
 
 import java.util.List;
 

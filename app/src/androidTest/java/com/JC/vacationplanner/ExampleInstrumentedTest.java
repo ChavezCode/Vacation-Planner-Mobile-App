@@ -1,4 +1,4 @@
-package com.example.vacationplanner;
+package com.JC.vacationplanner;
 
 import android.content.Context;
 

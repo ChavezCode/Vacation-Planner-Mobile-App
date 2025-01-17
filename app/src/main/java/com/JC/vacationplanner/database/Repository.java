@@ -1,11 +1,11 @@
-package com.example.vacationplanner.database;
+package com.JC.vacationplanner.database;
 
 import android.app.Application;
 
-import com.example.vacationplanner.dao.ExcursionDAO;
-import com.example.vacationplanner.dao.VacationDAO;
-import com.example.vacationplanner.entities.Excursion;
-import com.example.vacationplanner.entities.Vacation;
+import com.JC.vacationplanner.dao.ExcursionDAO;
+import com.JC.vacationplanner.dao.VacationDAO;
+import com.JC.vacationplanner.entities.Excursion;
+import com.JC.vacationplanner.entities.Vacation;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;

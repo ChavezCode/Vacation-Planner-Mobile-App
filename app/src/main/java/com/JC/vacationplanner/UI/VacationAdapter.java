@@ -1,4 +1,4 @@
-package com.example.vacationplanner.UI;
+package com.JC.vacationplanner.UI;
 
 
 import android.content.Context;
@@ -11,8 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.vacationplanner.R;
-import com.example.vacationplanner.entities.Vacation;
+import com.JC.vacationplanner.R;
+import com.JC.vacationplanner.entities.Vacation;
 
 import java.util.List;
 

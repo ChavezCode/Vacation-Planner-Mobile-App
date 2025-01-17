@@ -1,4 +1,4 @@
-package com.example.vacationplanner.UI;
+package com.JC.vacationplanner.UI;
 
 
 import android.os.Bundle;
@@ -11,9 +11,9 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.vacationplanner.R;
-import com.example.vacationplanner.database.Repository;
-import com.example.vacationplanner.entities.Vacation;
+import com.JC.vacationplanner.R;
+import com.JC.vacationplanner.database.Repository;
+import com.JC.vacationplanner.entities.Vacation;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.example.vacationplanner.database;
+package com.JC.vacationplanner.database;
 
 
 import android.content.Context;
@@ -7,10 +7,10 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import com.example.vacationplanner.dao.ExcursionDAO;
-import com.example.vacationplanner.dao.VacationDAO;
-import com.example.vacationplanner.entities.Excursion;
-import com.example.vacationplanner.entities.Vacation;
+import com.JC.vacationplanner.dao.ExcursionDAO;
+import com.JC.vacationplanner.dao.VacationDAO;
+import com.JC.vacationplanner.entities.Excursion;
+import com.JC.vacationplanner.entities.Vacation;
 
 
 //need to build the enetities first to build db

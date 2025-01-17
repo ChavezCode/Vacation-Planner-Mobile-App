@@ -1,15 +1,13 @@
-package com.example.vacationplanner.UI;
+package com.JC.vacationplanner.UI;
 
-import static com.example.vacationplanner.R.*;
+import static com.JC.vacationplanner.R.*;
 
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.PendingIntent;
-import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,17 +18,16 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.vacationplanner.R;
-import com.example.vacationplanner.database.Repository;
-import com.example.vacationplanner.entities.Excursion;
-import com.example.vacationplanner.entities.Vacation;
+import com.JC.vacationplanner.R;
+import com.JC.vacationplanner.database.Repository;
+import com.JC.vacationplanner.entities.Excursion;
+import com.JC.vacationplanner.entities.Vacation;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.ParseException;

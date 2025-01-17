@@ -1,12 +1,12 @@
-package com.example.vacationplanner;
+package com.JC.vacationplanner;
 
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 
 import static org.junit.Assert.*;
 
-import com.example.vacationplanner.entities.Excursion;
-import com.example.vacationplanner.entities.Vacation;
+import com.JC.vacationplanner.entities.Excursion;
+import com.JC.vacationplanner.entities.Vacation;
 
 public class UnitTest {
     //setVacation

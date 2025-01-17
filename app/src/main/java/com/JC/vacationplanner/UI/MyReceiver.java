@@ -1,4 +1,4 @@
-package com.example.vacationplanner.UI;
+package com.JC.vacationplanner.UI;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
 
-import com.example.vacationplanner.R;
+import com.JC.vacationplanner.R;
 
 public class MyReceiver extends BroadcastReceiver {
     //you need a channel for API 26 to set notifications
