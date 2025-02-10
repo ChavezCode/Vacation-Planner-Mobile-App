@@ -42,7 +42,7 @@ The following steps go through how to work the app:
 
 ______________________________________________________________________________________________________________________
 
-## APK DEPOLOYED AND SINED TO:
+## APK DEPOLOYED AND SIGNED TO:
 ANDROID STUDIO LADYBUG 2024.2.1 with a Targetsdk of 34.  
 
 ______________________________________________________________________________________________________________________
